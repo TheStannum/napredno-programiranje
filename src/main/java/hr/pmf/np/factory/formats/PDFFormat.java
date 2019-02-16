@@ -1,24 +1,44 @@
 package hr.pmf.np.factory.formats;
+import java.io.*;
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import java.util.jar.JarFile;
+
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfWriter;
+
 
 import hr.pmf.np.factory.IDocumentFormat;
 
-import javax.swing.text.Document;
-
 public class PDFFormat implements IDocumentFormat {
 
-    private Document doc;
+    private javax.swing.text.Document doc;
 
-    public PDFFormat(Document doc) {
+    public PDFFormat(javax.swing.text.Document doc) {
         this.doc = doc;
     }
 
     @Override
     public void write(String filePath) {
-        // TODO
+
+        Document document = new Document();
+        try {
+            PdfWriter writer = PdfWriter.getInstance(document,new FileOutputStream("ExportedPDF.pdf"));
+            document.open();
+            document.add(new Paragraph(doc.getText(0, doc.getLength())));
+            document.close();
+            writer.close();
+        }
+        catch (DocumentException | FileNotFoundException | BadLocationException de) {
+            de.printStackTrace();
+        }
+
+
     }
 
     @Override
-    public Document getDocument() {
+    public javax.swing.text.Document getDocument() {
         return this.doc;
     }
 

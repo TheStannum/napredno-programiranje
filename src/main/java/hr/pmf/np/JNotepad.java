@@ -1,12 +1,16 @@
 package hr.pmf.np;
 
 import hr.pmf.np.actions.*;
+import hr.pmf.np.factory.Formats;
+import hr.pmf.np.factory.formats.PDFFormat;
+import hr.pmf.np.factory.formats.TXTFormat;
 
 import javax.swing.*;
 import javax.swing.text.Document;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.Format;
 
 public class JNotepad extends JFrame {
 
@@ -17,6 +21,8 @@ public class JNotepad extends JFrame {
     private Action SaveAction;
     private Action SaveAsAction;
     private Action ExitAction;
+    private Action TXTFormat;
+    private Action TextToPDFConverter;
 
     public JNotepad() {
         setTitle("Jnotepad");
@@ -70,7 +76,9 @@ public class JNotepad extends JFrame {
     }
 
     private JMenu createExportMenu() {
-        JMenu exportMenu = new JMenu("Export as:");
+
+
+        JMenu exportMenu = new JMenu("Export");
 
         JMenuItem asPDF = new JMenuItem("As PDF");
         exportMenu.add(asPDF);
@@ -78,8 +86,8 @@ public class JNotepad extends JFrame {
         JMenuItem asPNG = new JMenuItem("As png");
         exportMenu.add(asPNG);
 
-        JMenuItem asJPG = new JMenuItem("as jpg" );
-        exportMenu.add(asJPG);
+        JMenuItem asTXT = new JMenuItem("As TXT");
+        exportMenu.add(asTXT);
 
 
         return exportMenu;
