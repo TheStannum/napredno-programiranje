@@ -40,3 +40,14 @@ Ajmo vidjt koji se klinac ovdje dešava.
  kojima cijelo vrijeme pričamo, no također zna i kako ih adekvatno pozvati. U
   ovom slučaju to će biti pojedine grafičke komponente koje će znati kada su 
   aktvirane koju akciju ili akcije pozvati. 
+  
+ - **ICommand**: Apstraktno sučelje koje označava ggeneralnu akciju i 
+ najcesce samo ejdnu metodu koju je potrebo implementirati
+ 
+ - **Command**: Konkretna implementacija naredbe
+ 
+ - **Receiver**: Opcionalan objekt, stvar na koju se odrazavaju posljedice 
+ naredbe
+ 
+ U Javi postoji sučelje action, međutim mi se necemo s njime borit previse. 
+ Postoji 
