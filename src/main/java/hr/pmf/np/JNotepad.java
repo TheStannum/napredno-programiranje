@@ -3,6 +3,7 @@ package hr.pmf.np;
 import hr.pmf.np.actions.*;
 
 import javax.swing.*;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 import java.awt.*;
 
@@ -42,6 +43,11 @@ public class JNotepad extends JFrame {
         createEditor(mainPanel);
 
         createMenu();
+
+        DocumentListener counter = new CharacterCounter();
+        this.doc.addDocumentListener(counter);
+
+        mainPanel.add((Component) counter, BorderLayout.SOUTH);
     }
 
     private void createEditor(JPanel panel) {
