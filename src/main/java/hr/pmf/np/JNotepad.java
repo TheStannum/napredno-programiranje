@@ -52,6 +52,7 @@ public class JNotepad extends JFrame {
 
     private void createEditor(JPanel panel) {
         JTextArea area = new JTextArea();
+        area.setLineWrap(true);
 
         area.setBackground(Color.DARK_GRAY);
         area.setForeground(Color.LIGHT_GRAY);
