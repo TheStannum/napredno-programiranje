@@ -1,28 +1,21 @@
 package hr.pmf.np;
 
 import hr.pmf.np.actions.*;
-import hr.pmf.np.factory.Formats;
-import hr.pmf.np.factory.formats.PDFFormat;
-import hr.pmf.np.factory.formats.TXTFormat;
 
 import javax.swing.*;
 import javax.swing.text.Document;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.Format;
 
 public class JNotepad extends JFrame {
 
     private Document doc;
 
     private Action newAction;
-    private Action OpenAction;
-    private Action SaveAction;
-    private Action SaveAsAction;
-    private Action ExitAction;
-    private Action TXTFormat;
-    private Action TextToPDFConverter;
+    private Action openAction;
+    private Action saveAction;
+    private Action saveAsAction;
+    private Action exitAction;
+    private Action exportAction;
 
     public JNotepad() {
         setTitle("Jnotepad");
@@ -36,7 +29,6 @@ public class JNotepad extends JFrame {
         } catch (Exception e) {
             // Lijepši pregled "New"
         }
-
 
 
         initGUI();
@@ -80,13 +72,19 @@ public class JNotepad extends JFrame {
 
         JMenu exportMenu = new JMenu("Export");
 
-        JMenuItem asPDF = new JMenuItem("As PDF");
+        JMenuItem asPDF = new JMenuItem(exportAction);
+        asPDF.setActionCommand("pdf");
+        asPDF.setText("as .pdf");
         exportMenu.add(asPDF);
 
-        JMenuItem asPNG = new JMenuItem("As png");
+        JMenuItem asPNG = new JMenuItem(exportAction);
+        asPNG.setActionCommand("png");
+        asPNG.setText("as .png");
         exportMenu.add(asPNG);
 
-        JMenuItem asTXT = new JMenuItem("As TXT");
+        JMenuItem asTXT = new JMenuItem(exportAction);
+        asTXT.setActionCommand("txt");
+        asTXT.setText("as .txt");
         exportMenu.add(asTXT);
 
 
@@ -95,11 +93,12 @@ public class JNotepad extends JFrame {
 
     private void createActions() {
         this.newAction = new NewAction("New", "Create new file...", this.doc);
-        this.OpenAction = new OpenAction("Open new file", "Opens a new file...", this.doc);
-        this.SaveAction = new SaveAction("Save file", "Save file on disk",this.doc);
-        this.SaveAsAction = new SaveAsAction("Save file as","Choose how so save a file", this.doc);
-        this.ExitAction = new ExitAction("Exit ", "Exit the program without saving",this.doc);
-
+        this.openAction = new OpenAction("Open new file", "Opens a new file...", this.doc);
+        this.saveAction = new SaveAction("Save file", "Save file on disk", this.doc);
+        this.saveAsAction = new SaveAsAction("Save file as", "Choose how so save a file", this.doc);
+        this.exitAction = new ExitAction("Exit ", "Exit the program without saving", this.doc);
+        this.exportAction = new ExportAction("Export", "Export the file with " +
+                "specified format", this.doc);
     }
 
     private JMenu createFileMenu() {
@@ -109,24 +108,21 @@ public class JNotepad extends JFrame {
         fileMenu.add(newItem);
 
 
-
-        JMenuItem openItem = new JMenuItem(this.OpenAction);
+        JMenuItem openItem = new JMenuItem(this.openAction);
         fileMenu.add(openItem);
 
 
-
-        JMenuItem saveItem = new JMenuItem(this.SaveAction);
+        JMenuItem saveItem = new JMenuItem(this.saveAction);
         fileMenu.add(saveItem);
 
-        JMenuItem saveAsItem = new JMenuItem(this.SaveAsAction);
+        JMenuItem saveAsItem = new JMenuItem(this.saveAsAction);
         fileMenu.add(saveAsItem);
 
-        JMenuItem exitItem = new JMenuItem(this.ExitAction);
+        JMenuItem exitItem = new JMenuItem(this.exitAction);
         fileMenu.add(exitItem);
 
         return fileMenu;
     }
-
 
 
     public static void main(String[] args) {
